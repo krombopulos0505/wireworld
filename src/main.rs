@@ -33,13 +33,16 @@ fn main() -> std::io::Result<()> {
 fn run_app(renderer: &mut Renderer, grid: &mut Grid<Cell>) -> std::io::Result<()> {
     let mut cx = 0i32;
     let mut cy = 0i32;
+    let mut pause = true;
     loop {
-        let snapshot = grid.clone();
-        for y in 0..grid.h as i32 {
-            for x in 0..grid.w as i32 {
-                let neighbors = snapshot.count_neighbors(x, y);
-                if let Some(cell) = grid.get_mut(x, y) {
-                    cell.step(neighbors);
+        if !pause {
+            let snapshot = grid.clone();
+            for y in 0..grid.h as i32 {
+                for x in 0..grid.w as i32 {
+                    let neighbors = snapshot.count_neighbors(x, y);
+                    if let Some(cell) = grid.get_mut(x, y) {
+                        cell.step(neighbors);
+                    }
                 }
             }
         }
@@ -67,6 +70,11 @@ fn run_app(renderer: &mut Renderer, grid: &mut Grid<Cell>) -> std::io::Result<()
                         if let Some(cell) = grid.get_mut(cx, cy) {
                             *cell = Cell::Head;
                         }
+                    }
+                    KeyCode::Char(' ') => if pause {
+                        pause = false;
+                    } else {
+                        pause = true;
                     }
                     _ => {}
                 },
