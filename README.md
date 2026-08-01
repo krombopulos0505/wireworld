@@ -10,10 +10,10 @@ cargo build --release
 ```
 
 ## How to Play
-. - to delete any cell
-c - to put conductor
-v - to put electron head
-h, j, k, l - are movement keys
+. - to delete any cell  
+c - to put conductor  
+v - to put electron head  
+h, j, k, l - are movement keys  
 
 ## License
 MIT License
