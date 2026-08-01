@@ -16,7 +16,7 @@ use grid::Grid;
 use renderer::Renderer;
 
 fn main() -> std::io::Result<()> {
-    let mut grid = Grid::<Cell>::new(80, 24);
+    let mut grid = Grid::<Cell>::new(40, 24);
     let mut renderer = Renderer::new();
 
     enable_raw_mode()?;
@@ -71,6 +71,11 @@ fn run_app(renderer: &mut Renderer, grid: &mut Grid<Cell>) -> std::io::Result<()
                             *cell = Cell::Head;
                         }
                     }
+                    KeyCode::Char('b') => {
+                        if let Some(cell) = grid.get_mut(cx, cy) {
+                            *cell = Cell::Tail;
+                        }
+                    }
                     KeyCode::Char(' ') => if pause {
                         pause = false;
                     } else {
@@ -83,6 +88,6 @@ fn run_app(renderer: &mut Renderer, grid: &mut Grid<Cell>) -> std::io::Result<()
         }
 
         renderer.draw(&grid)?;
-        execute!(renderer.out, cursor::MoveTo(cx as u16, cy as u16))?;
+        execute!(renderer.out, cursor::MoveTo(2*cx as u16, cy as u16))?;
     }
 }

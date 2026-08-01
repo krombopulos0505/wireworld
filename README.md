@@ -13,6 +13,7 @@ cargo build --release
 . - to delete any cell  
 c - to put conductor  
 v - to put electron head  
+b - to put electron tail
 h, j, k, l - are movement keys  
 
 ## License

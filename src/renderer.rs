@@ -21,20 +21,20 @@ impl Renderer {
         for y in 0..grid.h as i32 {
             for x in 0..grid.w as i32 {
                 if let Some(cell) = grid.get(x, y) {
-                    queue!(self.out, cursor::MoveTo(x as u16, y as u16))?;
+                    queue!(self.out, cursor::MoveTo(2*x as u16, y as u16))?;
                     match cell {
                         Cell::Empty => {}
                         Cell::Head => {
                             queue!(self.out, SetBackgroundColor(Color::Blue))?;
-                            queue!(self.out, Print(" "))?;
+                            queue!(self.out, Print("  "))?;
                         }
                         Cell::Tail => {
                             queue!(self.out, SetBackgroundColor(Color::Red))?;
-                            queue!(self.out, Print(" "))?;
+                            queue!(self.out, Print("  "))?;
                         }
                         Cell::Conductor => {
                             queue!(self.out, SetBackgroundColor(Color::Yellow))?;
-                            queue!(self.out, Print(" "))?;
+                            queue!(self.out, Print("  "))?;
                         }
                     }
                     queue!(self.out, ResetColor)?;
