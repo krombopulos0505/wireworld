@@ -38,10 +38,10 @@ impl Renderer {
                         }
                     }
                     queue!(self.out, ResetColor)?;
-                    self.out.flush()?;
                 }
             }
         }
+        self.out.flush()?;
         Ok(())
     }
 }
